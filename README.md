@@ -16,3 +16,16 @@ the current directory, and drops you into vim's search mode automatically.
 
 This is mapped to ctrl-P by default - try and guess which one of the above list
 I was using previously ;)
+
+Install
+-------
+
+Install with the
+[pathogen plugin manager](https://github.com/tpope/vim-pathogen):
+```sh
+cd ~/.vim/bundle && \
+git clone git@github.com:eapache/vim-yaff.git
+```
+
+It probably installs with other plugin managers (like Vundle) as well, I just
+haven't tried.
