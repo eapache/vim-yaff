@@ -4,7 +4,7 @@ function ListFiles()
   call setline(1, files)
   set nomodifiable
   call cursor(1, 1)
-  call feedkeys("/")
+  call feedkeys("/\\V")
 endfunction
 
 function Exit()
