@@ -7,20 +7,20 @@ function yaff#ListFiles()
   call feedkeys("/\\V")
 endfunction
 
-function Enter()
-  nmap <CR> :call ChooseFile()<CR>
-  nmap <Esc> :call Exit()<CR>
+function s:ChooseFile()
+  let file = getline(".")
+  call <SID>Exit()
+  execute 'edit' fnameescape(file)
 endfunction
 
-function Exit()
+function s:Enter()
+  nmap <CR> :call <SID>ChooseFile()<CR>
+  nmap <Esc> :call <SID>Exit()<CR>
+endfunction
+
+function s:Exit()
   bdelete!
   set modifiable
 endfunction
 
-function ChooseFile()
-  let file = getline(".")
-  call Exit()
-  execute 'edit' fnameescape(file)
-endfunction
-
-au BufEnter FileFinder call Enter()
+au BufEnter FileFinder call <SID>Enter()
