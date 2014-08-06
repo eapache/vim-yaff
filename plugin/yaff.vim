@@ -7,6 +7,11 @@ function ListFiles()
   call feedkeys("/\\V")
 endfunction
 
+function Enter()
+  nmap <CR> :call ChooseFile()<CR>
+  nmap <Esc> :call Exit()<CR>
+endfunction
+
 function Exit()
   bdelete!
   set modifiable
@@ -20,5 +25,4 @@ endfunction
 
 map <C-p> :call ListFiles()<CR>
 
-au BufEnter FileFinder nmap <CR> :call ChooseFile()<CR>
-au BufEnter FileFinder nmap <Esc> :call Exit()<CR>
+au BufEnter FileFinder call Enter()
