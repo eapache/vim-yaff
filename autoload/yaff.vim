@@ -1,5 +1,5 @@
 function yaff#ListFiles()
-  new FileFinder
+  new YaffList
   let files = split(globpath('.', '**'))
   call setline(1, files)
   set nomodifiable
@@ -25,4 +25,4 @@ function s:Exit()
   set modifiable
 endfunction
 
-au BufEnter FileFinder call <SID>Enter()
+au BufEnter YaffList call <SID>Enter()
