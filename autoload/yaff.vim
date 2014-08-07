@@ -1,28 +1,29 @@
 function yaff#ListFiles()
   new YaffList
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+
   let files = split(globpath('.', '**'))
   call setline(1, files)
-  set nomodifiable
   call cursor(1, 1)
   call feedkeys("/\\V")
+
+  setlocal nomodifiable
 endfunction
 
 function s:ChooseFile()
   let file = getline(".")
-  call <SID>Exit()
+  bdelete
   execute 'edit' fnameescape(file)
 endfunction
 
 function s:Enter()
-  nmap <silent> <CR> :call <SID>ChooseFile()<CR>
-  nmap <silent> <Esc> :call <SID>Exit()<CR>
-  nmap <silent> <C-c> :call <SID>Exit()<CR>
-  nmap <silent> q :call <SID>Exit()<CR>
+  nmap <silent> <buffer> <CR> :call <SID>ChooseFile()<CR>
+  nmap <silent> <buffer> <Esc> :bdelete<CR>
+  nmap <silent> <buffer> <C-c> :bdelete<CR>
+  nmap <silent> <buffer> q :bdelete<CR>
 endfunction
 
-function s:Exit()
-  bdelete!
-  set modifiable
-endfunction
-
-au BufEnter YaffList call <SID>Enter()
+au BufWinEnter YaffList call <SID>Enter()
+au BufWinLeave YaffList bdelete
