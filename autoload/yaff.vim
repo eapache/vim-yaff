@@ -16,6 +16,8 @@ endfunction
 function s:Enter()
   nmap <silent> <CR> :call <SID>ChooseFile()<CR>
   nmap <silent> <Esc> :call <SID>Exit()<CR>
+  nmap <silent> <C-c> :call <SID>Exit()<CR>
+  nmap <silent> q :call <SID>Exit()<CR>
 endfunction
 
 function s:Exit()
