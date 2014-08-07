@@ -25,5 +25,7 @@ function s:Enter()
   nmap <silent> <buffer> q :bdelete<CR>
 endfunction
 
-au BufWinEnter YaffList call <SID>Enter()
-au BufWinLeave YaffList bdelete
+augroup Yaff
+  autocmd BufWinEnter YaffList call <SID>Enter()
+  autocmd BufWinLeave YaffList bdelete
+augroup END
