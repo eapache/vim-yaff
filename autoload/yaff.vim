@@ -4,7 +4,7 @@ function yaff#ListFiles()
   setlocal bufhidden=hide
   setlocal noswapfile
 
-  let files = split(globpath('.', '**'))
+  let files = split(globpath('.', '**'), '\n')
   call setline(1, files)
   call cursor(1, 1)
   call feedkeys("/\\V")
