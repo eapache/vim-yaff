@@ -10,6 +10,10 @@ function yaff#ListFiles()
   call feedkeys("/\\V")
 
   setlocal nomodifiable
+  nmap <silent> <buffer> <CR> :call <SID>ChooseFile()<CR>
+  nmap <silent> <buffer> <Esc> :bdelete<CR>
+  nmap <silent> <buffer> <C-c> :bdelete<CR>
+  nmap <silent> <buffer> q :bdelete<CR>
 endfunction
 
 function s:ChooseFile()
@@ -18,14 +22,6 @@ function s:ChooseFile()
   execute 'edit' fnameescape(file)
 endfunction
 
-function s:Enter()
-  nmap <silent> <buffer> <CR> :call <SID>ChooseFile()<CR>
-  nmap <silent> <buffer> <Esc> :bdelete<CR>
-  nmap <silent> <buffer> <C-c> :bdelete<CR>
-  nmap <silent> <buffer> q :bdelete<CR>
-endfunction
-
 augroup Yaff
-  autocmd BufWinEnter YaffList call <SID>Enter()
   autocmd BufWinLeave YaffList bdelete
 augroup END
