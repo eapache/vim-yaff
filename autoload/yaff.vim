@@ -24,6 +24,8 @@ endfunction
 
 function s:ChooseFile()
   let file = fnameescape(getline("."))
+  call filter(s:recently_used, 'v:val !=# "' . file . '"')
+  call filter(s:files, 'v:val !=# "' . file . '"')
   call add(s:recently_used, file)
   bdelete
   execute 'edit' file
