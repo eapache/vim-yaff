@@ -16,10 +16,10 @@ function yaff#ListFiles()
   call feedkeys("/\\V")
 
   setlocal nomodifiable
-  nmap <silent> <buffer> <CR> :call <SID>ChooseFile()<CR>
-  nmap <silent> <buffer> <Esc> :bdelete<CR>
-  nmap <silent> <buffer> <C-c> :bdelete<CR>
-  nmap <silent> <buffer> q :bdelete<CR>
+  nnoremap <silent> <buffer> <CR> :call <SID>ChooseFile()<CR>
+  nnoremap <silent> <buffer> <Esc> :bdelete<CR>
+  nnoremap <silent> <buffer> <C-c> :bdelete<CR>
+  nnoremap <silent> <buffer> q :bdelete<CR>
 endfunction
 
 function s:ChooseFile()
