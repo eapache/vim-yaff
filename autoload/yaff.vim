@@ -1,4 +1,5 @@
 let s:recently_used = []
+let s:files = []
 
 function yaff#ListFiles()
   new YaffList
@@ -6,9 +7,11 @@ function yaff#ListFiles()
   setlocal bufhidden=hide
   setlocal noswapfile
 
-  let files = split(globpath('.', '**'), '\n')
+  if len(s:files) == 0
+    let s:files = split(globpath('.', '**'), '\n')
+  endif
   call setline(1, s:recently_used)
-  call setline(len(s:recently_used) + 1, files)
+  call setline(len(s:recently_used) + 1, s:files)
   call cursor(1, 1)
   call feedkeys("/\\V")
 
