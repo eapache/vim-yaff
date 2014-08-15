@@ -1,3 +1,5 @@
+let s:recently_used = []
+
 function yaff#ListFiles()
   new YaffList
   setlocal buftype=nofile
@@ -5,7 +7,8 @@ function yaff#ListFiles()
   setlocal noswapfile
 
   let files = split(globpath('.', '**'), '\n')
-  call setline(1, files)
+  call setline(1, s:recently_used)
+  call setline(len(s:recently_used) + 1, files)
   call cursor(1, 1)
   call feedkeys("/\\V")
 
@@ -17,9 +20,10 @@ function yaff#ListFiles()
 endfunction
 
 function s:ChooseFile()
-  let file = getline(".")
+  let file = fnameescape(getline("."))
+  call add(s:recently_used, file)
   bdelete
-  execute 'edit' fnameescape(file)
+  execute 'edit' file
 endfunction
 
 augroup Yaff
