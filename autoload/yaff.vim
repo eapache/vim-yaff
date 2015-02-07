@@ -1,4 +1,3 @@
-let s:recently_used = []
 let s:files = []
 
 function yaff#ListFiles()
@@ -10,8 +9,7 @@ function yaff#ListFiles()
   if len(s:files) == 0
     let s:files = split(globpath('.', '**'), '\n')
   endif
-  call setline(1, s:recently_used)
-  call setline(len(s:recently_used) + 1, s:files)
+  call setline(1, s:files)
   call cursor(1, 1)
   call feedkeys("/\\V")
 
@@ -24,9 +22,6 @@ endfunction
 
 function s:ChooseFile()
   let file = fnameescape(getline("."))
-  call filter(s:recently_used, 'v:val !=# "' . file . '"')
-  call filter(s:files, 'v:val !=# "' . file . '"')
-  call add(s:recently_used, file)
   bdelete
   execute 'edit' file
 endfunction
